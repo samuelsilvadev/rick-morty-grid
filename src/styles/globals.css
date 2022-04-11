@@ -8,3 +8,13 @@ body {
   box-sizing: border-box;
   font-family: "Montserrat", sans-serif;
 }
+
+:root {
+  --layout-padding-x: 20px;
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --layout-padding-x: 50px;
+  }
+}
