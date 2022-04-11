@@ -2,6 +2,7 @@ import type { NextPage, GetServerSideProps } from "next";
 import CharacterCard from "components/CharacterCard";
 import List from "components/List";
 import type { Character, CharacterParsedResponse } from "types/character";
+import ChevronLeft from "components/icons/ChevronLeft";
 import styles from "styles/index.module.css";
 
 type Props = {
@@ -16,11 +17,21 @@ const Home: NextPage<Props> = ({ characters }) => {
   return (
     <>
       <h1>Rick and Morty Grid</h1>
+      <button
+        className={`${styles.paginationButton} ${styles.paginationPreviousButton}`}
+      >
+        <ChevronLeft />
+      </button>
       <List
         className={styles.gridOfCharacters}
         items={characters}
         renderItem={renderCharacterCard}
       />
+      <button
+        className={`${styles.paginationButton} ${styles.paginationNextButton}`}
+      >
+        <ChevronLeft />
+      </button>
     </>
   );
 };

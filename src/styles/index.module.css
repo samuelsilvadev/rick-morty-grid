@@ -1,3 +1,35 @@
+.paginationButton {
+  position: fixed;
+  top: 50vh;
+  padding: 0;
+  display: flex;
+  border: 2px solid #f4f4f4;
+  cursor: pointer;
+  background-color: #020adc;
+  color: #fff;
+  padding: 5px;
+}
+
+.paginationButton:hover {
+  background-color: #f4f4f4;
+  border-color: #020adc;
+  color: #020adc;
+}
+
+.paginationPreviousButton {
+  left: var(--layout-padding-x);
+  transform: translateX(-50%);
+}
+
+.paginationNextButton {
+  right: var(--layout-padding-x);
+  transform: translateX(50%);
+}
+
+.paginationNextButton > svg {
+  transform: rotate(180deg);
+}
+
 .gridOfCharacters {
   display: grid;
   grid-template-columns: repeat(var(--numberOfElementsOnGrid, 1), 1fr);
