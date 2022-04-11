@@ -1,0 +1,22 @@
+.gridOfCharacters {
+  display: grid;
+  grid-template-columns: repeat(var(--numberOfElementsOnGrid, 1), 1fr);
+}
+
+@media (min-width: 768px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 3;
+  }
+}
+
+@media (min-width: 1440px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 4;
+  }
+}
