@@ -8,6 +8,10 @@ type Props = {
   characters: Character[];
 };
 
+const renderCharacterCard = (character: Character) => {
+  return <CharacterCard {...character} className={styles.characterCard} />;
+};
+
 const Home: NextPage<Props> = ({ characters }) => {
   return (
     <>
@@ -15,7 +19,7 @@ const Home: NextPage<Props> = ({ characters }) => {
       <List
         className={styles.gridOfCharacters}
         items={characters}
-        renderItem={CharacterCard}
+        renderItem={renderCharacterCard}
       />
     </>
   );
