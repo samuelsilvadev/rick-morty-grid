@@ -1,0 +1,140 @@
+.header {
+  position: sticky;
+  top: 0;
+  border-bottom: 2px solid #f4f4f4;
+  background-color: #fff;
+  padding: 20px 0;
+  z-index: 1;
+}
+
+.heading {
+  margin: 0;
+}
+
+.paginationButton {
+  position: fixed;
+  top: 50vh;
+  padding: 0;
+  display: flex;
+  border: 2px solid #f4f4f4;
+  cursor: pointer;
+  background-color: #020adc;
+  color: #fff;
+  padding: 5px;
+}
+
+.paginationButton:hover {
+  background-color: #f4f4f4;
+  border-color: #020adc;
+  color: #020adc;
+}
+
+.paginationPreviousButton {
+  left: var(--layout-padding-x);
+  transform: translateX(-50%);
+}
+
+.paginationNextButton {
+  right: var(--layout-padding-x);
+  transform: translateX(50%);
+}
+
+.paginationNextButton > svg {
+  transform: rotate(180deg);
+}
+
+.disablePaginationButton,
+.disablePaginationButton:hover {
+  cursor: not-allowed;
+  background-color: #f4f4f4;
+  border-color: #f4f4f4;
+  color: #f4f4f4;
+}
+
+.gridOfCharacters {
+  display: grid;
+  grid-template-columns: repeat(var(--numberOfElementsOnGrid, 1), 1fr);
+  margin-bottom: 50px;
+}
+
+@media (max-width: 767px) {
+  .gridOfCharacters li:first-child .characterCard {
+    border-top-width: 0;
+  }
+
+  .gridOfCharacters li:not(:last-child) .characterCard {
+    border-bottom-width: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .characterCard {
+    border-width: 1px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 2;
+  }
+
+  .gridOfCharacters li:nth-child(-n + 2) .characterCard {
+    border-top-width: 0;
+  }
+
+  .gridOfCharacters li:nth-last-child(-n + 2) .characterCard {
+    border-bottom-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(2n + 1) .characterCard {
+    border-left-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(2n + 2) .characterCard {
+    border-right-width: 2px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1439px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 3;
+  }
+
+  .gridOfCharacters li:nth-child(-n + 3) .characterCard {
+    border-top-width: 0;
+  }
+
+  .gridOfCharacters li:nth-last-child(-n + 3) .characterCard {
+    border-bottom-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(3n + 1) .characterCard {
+    border-left-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(3n + 3) .characterCard {
+    border-right-width: 2px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .gridOfCharacters {
+    --numberOfElementsOnGrid: 4;
+  }
+
+  .gridOfCharacters li:nth-child(-n + 4) .characterCard {
+    border-top-width: 0;
+  }
+
+  .gridOfCharacters li:nth-last-child(-n + 4) .characterCard {
+    border-bottom-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(4n + 1) .characterCard {
+    border-left-width: 2px;
+  }
+
+  .gridOfCharacters li:nth-child(4n + 4) .characterCard {
+    border-right-width: 2px;
+  }
+}
