@@ -1,5 +1,5 @@
 import Head from "next/head";
-import type { NextPage, GetServerSideProps } from "next";
+import type { NextPage, GetStaticProps } from "next";
 import type { Character, CharacterParsedResponse } from "types/character";
 import CharacterPageLayout from "components/CharacterPageLayout";
 import { normalizeCharacterResponse } from "utils/normalizeCharacterResponse";
@@ -23,7 +23,7 @@ const Home: NextPage<Props> = ({ characters }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async () => {
+export const getStaticProps: GetStaticProps<Props> = async () => {
   const response = await fetch(process.env.API_BASE_URL + "/character");
   const parsedResponse: CharacterParsedResponse | null | undefined =
     await response.json();
