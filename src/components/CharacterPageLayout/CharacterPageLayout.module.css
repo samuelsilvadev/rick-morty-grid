@@ -1,3 +1,16 @@
+.header {
+  position: sticky;
+  top: 0;
+  border-bottom: 2px solid #f4f4f4;
+  background-color: #fff;
+  padding: 20px 0;
+  z-index: 1;
+}
+
+.heading {
+  margin: 0;
+}
+
 .paginationButton {
   position: fixed;
   top: 50vh;
@@ -30,7 +43,8 @@
   transform: rotate(180deg);
 }
 
-.disablePaginationButton, .disablePaginationButton:hover {
+.disablePaginationButton,
+.disablePaginationButton:hover {
   cursor: not-allowed;
   background-color: #f4f4f4;
   border-color: #f4f4f4;
@@ -44,6 +58,10 @@
 }
 
 @media (max-width: 767px) {
+  .gridOfCharacters li:first-child .characterCard {
+    border-top-width: 0;
+  }
+
   .gridOfCharacters li:not(:last-child) .characterCard {
     border-bottom-width: 0;
   }
@@ -61,7 +79,7 @@
   }
 
   .gridOfCharacters li:nth-child(-n + 2) .characterCard {
-    border-top-width: 2px;
+    border-top-width: 0;
   }
 
   .gridOfCharacters li:nth-last-child(-n + 2) .characterCard {
@@ -83,7 +101,7 @@
   }
 
   .gridOfCharacters li:nth-child(-n + 3) .characterCard {
-    border-top-width: 2px;
+    border-top-width: 0;
   }
 
   .gridOfCharacters li:nth-last-child(-n + 3) .characterCard {
@@ -105,7 +123,7 @@
   }
 
   .gridOfCharacters li:nth-child(-n + 4) .characterCard {
-    border-top-width: 2px;
+    border-top-width: 0;
   }
 
   .gridOfCharacters li:nth-last-child(-n + 4) .characterCard {

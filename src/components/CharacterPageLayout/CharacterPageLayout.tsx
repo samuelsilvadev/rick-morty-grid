@@ -22,7 +22,9 @@ const CharacterPageLayout = ({
 }: CharacterPageLayoutProps) => {
   return (
     <>
-      <h1>Rick and Morty Grid</h1>
+      <header className={styles.header}>
+        <h1 className={styles.heading}>Rick and Morty Stamp Album</h1>
+      </header>
       <Link href={previousPage ? `/${previousPage}` : "/#"}>
         <a
           aria-disabled={!previousPage}
