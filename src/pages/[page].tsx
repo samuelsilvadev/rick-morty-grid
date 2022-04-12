@@ -1,3 +1,4 @@
+import Head from "next/head";
 import type { GetServerSideProps, NextPage } from "next";
 import type { Character, CharacterParsedResponse } from "types/character";
 import CharacterPageLayout from "components/CharacterPageLayout";
@@ -10,13 +11,36 @@ type Props = {
   characters: Character[];
 };
 
+const buildCurrentPageNumber = (
+  previousPage: number | null,
+  nextPage: number | null
+) => {
+  if (nextPage) {
+    return nextPage - 1;
+  }
+
+  if (previousPage) {
+    return previousPage + 1;
+  }
+
+  return null;
+};
+
 const Page: NextPage<Props> = ({ characters, previousPage, nextPage }) => {
   return (
-    <CharacterPageLayout
-      previousPage={previousPage}
-      nextPage={nextPage}
-      characters={characters}
-    />
+    <>
+      <Head>
+        <title>
+          Rick and Morty - Page{" "}
+          {buildCurrentPageNumber(previousPage, nextPage) ?? "Not Identified"}
+        </title>
+      </Head>
+      <CharacterPageLayout
+        previousPage={previousPage}
+        nextPage={nextPage}
+        characters={characters}
+      />
+    </>
   );
 };
 

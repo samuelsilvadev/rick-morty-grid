@@ -1,3 +1,4 @@
+import Head from "next/head";
 import type { NextPage, GetServerSideProps } from "next";
 import type { Character, CharacterParsedResponse } from "types/character";
 import CharacterPageLayout from "components/CharacterPageLayout";
@@ -9,11 +10,16 @@ type Props = {
 
 const Home: NextPage<Props> = ({ characters }) => {
   return (
-    <CharacterPageLayout
-      characters={characters}
-      previousPage={null}
-      nextPage={2}
-    />
+    <>
+      <Head>
+        <title>Rick and Morty</title>
+      </Head>
+      <CharacterPageLayout
+        characters={characters}
+        previousPage={null}
+        nextPage={2}
+      />
+    </>
   );
 };
 
