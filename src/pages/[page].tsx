@@ -52,8 +52,16 @@ export const getServerSideProps: GetServerSideProps<Props> = async (
   const response = await fetch(
     process.env.API_BASE_URL + "/character?page=" + page
   );
-  const parsedResponse: CharacterParsedResponse = await response.json();
-  const { prev, next } = parsedResponse.info;
+  const parsedResponse: CharacterParsedResponse | null | undefined =
+    await response.json();
+
+  if (parsedResponse && "error" in parsedResponse) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const { prev, next } = parsedResponse?.info ?? { prev: null, next: null };
 
   return {
     props: {

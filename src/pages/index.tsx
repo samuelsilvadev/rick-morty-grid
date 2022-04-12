@@ -25,7 +25,8 @@ const Home: NextPage<Props> = ({ characters }) => {
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {
   const response = await fetch(process.env.API_BASE_URL + "/character");
-  const parsedResponse: CharacterParsedResponse = await response.json();
+  const parsedResponse: CharacterParsedResponse | null | undefined =
+    await response.json();
 
   return {
     props: {
