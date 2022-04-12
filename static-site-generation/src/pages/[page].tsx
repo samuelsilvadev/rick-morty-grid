@@ -1,5 +1,5 @@
 import Head from "next/head";
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import type { Character, CharacterParsedResponse } from "types/character";
 import CharacterPageLayout from "components/CharacterPageLayout";
 import { normalizeCharacterResponse } from "utils/normalizeCharacterResponse";
@@ -44,10 +44,34 @@ const Page: NextPage<Props> = ({ characters, previousPage, nextPage }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async (
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await fetch(process.env.API_BASE_URL + "/character");
+  const parsedResponse: CharacterParsedResponse | null | undefined =
+    await response.json();
+
+  if (parsedResponse && !("error" in parsedResponse)) {
+    const paths = Array.from(Array(parsedResponse.info.pages).keys()).map(
+      (index) => {
+        return { params: { page: (index + 1).toString() } };
+      }
+    );
+
+    return {
+      paths,
+      fallback: false,
+    };
+  }
+
+  return {
+    paths: [],
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps<Props, { page: string }> = async (
   context
 ) => {
-  const { page } = context.query;
+  const { page } = context.params ?? {};
 
   const response = await fetch(
     process.env.API_BASE_URL + "/character?page=" + page
