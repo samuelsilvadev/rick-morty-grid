@@ -8,7 +8,13 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ characters }) => {
-  return <CharacterPageLayout characters={characters} />;
+  return (
+    <CharacterPageLayout
+      characters={characters}
+      previousPage={null}
+      nextPage={2}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<Props> = async () => {

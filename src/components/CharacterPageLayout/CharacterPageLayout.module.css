@@ -30,6 +30,13 @@
   transform: rotate(180deg);
 }
 
+.disablePaginationButton, .disablePaginationButton:hover {
+  cursor: not-allowed;
+  background-color: #f4f4f4;
+  border-color: #f4f4f4;
+  color: #f4f4f4;
+}
+
 .gridOfCharacters {
   display: grid;
   grid-template-columns: repeat(var(--numberOfElementsOnGrid, 1), 1fr);
