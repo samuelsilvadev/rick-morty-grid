@@ -5,7 +5,7 @@ import { useQuery } from "react-query";
 import CharacterCard from "components/CharacterCard";
 import List from "components/List";
 import ChevronLeft from "components/icons/ChevronLeft";
-import { normalizeCharacterResponse } from "utils/normalizeCharacterResponse";
+import { normalizeCharacters } from "utils/normalizeCharacters";
 import type { Character, CharacterParsedResponse } from "types/character";
 import styles from "./CharacterPageLayout.module.css";
 
@@ -13,25 +13,27 @@ const renderCharacterCard = (character: Character) => {
   return <CharacterCard {...character} className={styles.characterCard} />;
 };
 
-const fetchCharacters = async (page: string): Promise<Character[]> => {
+const fetchCharacters = async (
+  page: string
+): Promise<CharacterParsedResponse | null | undefined> => {
   const response = await fetch(
     process.env.NEXT_PUBLIC_API_BASE_URL + "/character?page=" + page
   );
   const parsedResponse: CharacterParsedResponse | null | undefined =
     await response.json();
 
-  return normalizeCharacterResponse(parsedResponse);
+  return parsedResponse;
 };
 
 const CharacterPageLayout = () => {
   const { query, isReady } = useRouter();
   const [currentPage, setCurrentPage] = useState<string | undefined>();
-  const { data: characters = [], isLoading } = useQuery(
-    ["characters", currentPage],
-    () => {
-      return currentPage ? fetchCharacters(currentPage) : undefined;
-    }
-  );
+  const { data, isLoading } = useQuery(["characters", currentPage], () => {
+    return currentPage ? fetchCharacters(currentPage) : undefined;
+  });
+  const hasData = data && !("error" in data);
+  const characters = hasData ? normalizeCharacters(data.results) : [];
+  const pagination = hasData ? data.info : undefined;
 
   useEffect(() => {
     if (isReady) {
@@ -55,8 +57,7 @@ const CharacterPageLayout = () => {
           className={`${styles.paginationButton} ${
             styles.paginationPreviousButton
           } ${
-            !currentPage ||
-            (typeof currentPage === "string" && Number(currentPage) - 1 <= 0)
+            !currentPage || Number(currentPage) - 1 <= 0
               ? styles.disablePaginationButton
               : ""
           }`}
@@ -78,9 +79,14 @@ const CharacterPageLayout = () => {
           typeof currentPage === "string" ? `/${Number(currentPage) + 1}` : "/#"
         }
       >
-        {/* TODO: Disable next button at the last page */}
         <a
-          className={`${styles.paginationButton} ${styles.paginationNextButton}`}
+          className={`${styles.paginationButton} ${
+            styles.paginationNextButton
+          } ${
+            (!currentPage || Number(currentPage) === pagination?.pages) ?? 0
+              ? styles.disablePaginationButton
+              : ""
+          }`}
         >
           <ChevronLeft />
         </a>

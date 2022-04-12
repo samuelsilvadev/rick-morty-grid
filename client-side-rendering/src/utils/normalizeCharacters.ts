@@ -1,14 +1,10 @@
-import type { Character, CharacterParsedResponse } from "types/character";
+import type { Character, CharacterModel } from "types/character";
 
-export const normalizeCharacterResponse = (
-  response: CharacterParsedResponse | null | undefined
+export const normalizeCharacters = (
+  characters: CharacterModel[]
 ): Character[] => {
-  if (response && "error" in response) {
-    return [];
-  }
-
   return (
-    response?.results.map((character) => ({
+    characters.map((character) => ({
       id: character.id,
       gender: character.gender,
       image: character.image,
